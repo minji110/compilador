@@ -25,17 +25,17 @@ namespace IDE.Intermedio
 
         public void Run()
         {
-            assembly.Add(new StringBuilder(".model small"));
-            assembly.Add(new StringBuilder(".stack"));
-            assembly.Add(new StringBuilder(".data"));
+            assembly.Add(new StringBuilder("\t\t"+".model small"));
+            assembly.Add(new StringBuilder("\t\t"+".stack"));
+            assembly.Add(new StringBuilder("\t\t"+".data"));
             StartData();
-            assembly.Add(new StringBuilder(".code"));
+            assembly.Add(new StringBuilder("\t\t" + ".code"));
             //quadruples.ForEach(Console.WriteLine);
             foreach (var quadruple in quadruples)
                 StartCode(quadruple);
             AddTags();
             assembly.AddRange(code);
-            assembly.Add(new StringBuilder(".exit"));
+            assembly.Add(new StringBuilder("\t\t" + ".exit"));
         }
 
         private void StartData()
@@ -119,7 +119,7 @@ namespace IDE.Intermedio
                 case "==":
                     result.Append("\t").Append("MOV AX, ").Append(quadruple.Arg1).Append("\r\n");
                     result.Append("\t").Append("CMP AX, ").Append(quadruple.Arg2).Append("\r\n");
-                    result.Append("\t").Append("LAHF").Append("\n");
+                    //result.Append("\t").Append("LAHF").Append("\r\n");
                     result.Append("\t").Append("MOV ").Append(quadruple.Result).Append(", AH").Append("\r\n");
                     result.Append("\t").Append("ROL ").Append(quadruple.Result).Append(", 2").Append("\r\n");
                     result.Append("\t").Append("AND ").Append(quadruple.Result).Append(", 1");

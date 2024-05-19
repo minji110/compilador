@@ -11,6 +11,7 @@ using IDE.Lexico;
 using IDE.Parser;
 using IDE.Semantico;
 using IDE.Intermedio;
+using IDE.Objeto;
 
 namespace IDE
 {
@@ -21,6 +22,7 @@ namespace IDE
         semantico semantico;
         bool seCompletoParser=true;
         bool seCompletoSemantico = true;
+        Intermedio1 intermedio;
        
         public Saoko_BNF_diseño()
         {
@@ -235,7 +237,7 @@ namespace IDE
             directorio.Run();
             directorio.quadruples.ForEach(Console.WriteLine);*/
 
-            Intermedio1 intermedio = new Intermedio1(scanner.Tokens);
+            intermedio = new Intermedio1(scanner.Tokens);
             intermedio.Run();
             intermedio.GetAssembly();
             String asm = String.Join("\r\n", intermedio.GetAssembly());
@@ -246,6 +248,26 @@ namespace IDE
         private void todosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            intermedioToolStripMenuItem_Click(sender,e);
+            if (!seCompletoSemantico)
+                return;
+            string assembly = string.Join("\n", intermedio.GetAssembly());
+            Objecto code = new Objecto(new List<string>(assembly.Split('\n')));
+            code.Run();
+
+            string binary = string.Join("\r\n", code.GetBinaryCode());
+            binary = System.Text.RegularExpressions.Regex.Replace(binary, "(.{4})", "$1 ");
+            textBox6.Text = binary;
+
+        }
+
+        private void objetoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox6_TextChanged(sender, e);
         }
     }
 }

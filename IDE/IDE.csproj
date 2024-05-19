@@ -64,6 +64,7 @@
     <Compile Include="Lexico\Lexico.cs" />
     <Compile Include="Lexico\Tipo_Tokens.cs" />
     <Compile Include="Lexico\Tokens.cs" />
+    <Compile Include="Objeto\Objeto.cs" />
     <Compile Include="Parser\Sintactico.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
