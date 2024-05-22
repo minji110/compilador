@@ -271,11 +271,26 @@ namespace IDE.Objeto
             binaryCode.Add(builder);
         }
 
+        //da el formato binario
         private string FormatBinary(string value, int size)
         {
-            return value.PadLeft(size, '0');
+            // Rellenar la cadena con ceros a la izquierda hasta el tamaño especificado
+            string resultado = value.PadLeft(size, '0');
+
+            // Si el tamaño es menor a 9, devolver el resultado directamente
+            if (size < 9)
+                return resultado;
+
+            // Dividir la cadena en dos partes
+            string alta = resultado.Substring(0, 8);
+            string baja = resultado.Substring(8, Math.Min(8, resultado.Length - 8));
+
+            // Retornar las dos partes concatenadas sin coma
+            return baja+alta;
         }
 
+
+        //convertie a binario
         private string ConvertToBinary(string value)
         {
             return Convert.ToString(int.Parse(value), 2);
