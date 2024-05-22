@@ -282,7 +282,7 @@ namespace IDE.Objeto
                 return resultado;
 
             // Dividir la cadena en dos partes
-            string alta = resultado.Substring(0, 8);
+            string alta = resultado.Substring(0, 8);        //parte a separar 
             string baja = resultado.Substring(8, Math.Min(8, resultado.Length - 8));
 
             // Retornar las dos partes concatenadas sin coma
